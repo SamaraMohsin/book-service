@@ -6,26 +6,38 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/books")  // Any address like https://localhost:8080/books
+
+@RequestMapping("/book") //https:locahost:8080/book
 public class BookController {
+    
     private final BookRepository repository;
 
     public BookController(BookRepository repository){
-        this.repository = repository;
+        this.repository = repository;        
+    } 
+
+     // (POST) https:locahost:8080/book
+    @PostMapping
+    public void createBook(@RequestBody Book book){
+        repository.save(book);
     }
 
-    @PostMapping("")  // (POST) https://localhost:8080/books
-    public void createBook(@RequestBody Book book) {
-        this.repository.save(book);
+    
+     // (GET) https:locahost:8080/book/all
+     @GetMapping("/all") //GET https://Lo..../books/all
+     public Collection<Book> getAllBooks(){
+         return this.repository.getAllBooks();
+     }
+    
+    
+    @GetMapping("/") //  (GET) https:locahost:8080/book/?id=1
+    public Book getBook(@RequestParam int id){
+        return this.repository.getBook(id);
     }
-
-    @GetMapping("/all") // (GET) https://localhost:8080/books/all
-    public Collection<Book> getAllBooks(){
-        return this.repository.getAllBooks();
-    }
-
 
 }
+

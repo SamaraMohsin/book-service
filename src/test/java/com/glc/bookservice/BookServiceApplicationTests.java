@@ -72,4 +72,20 @@ class BookServiceApplicationTests {
 			.andExpect(status().isOk())
 			.andExpect(content().json(jsonBooks.write(books).getJson()));
 	}
+
+
+	
+	//AC3
+	@Test
+	public void canGetBooks() throws Exception{
+		Book book1 = new Book(1,"The Hobbit", "J.r.r. Tolken", 1927, 328);
+		when(bookRepository.getBook(1)).thenReturn(book1);
+		mvc.perform(get("/book/?id=1")
+		.contentType(MediaType.APPLICATION_JSON)
+		.content(jsonBook.write(book1).getJson()))
+		.andExpect(status().isOk())
+		.andExpect(content().json(jsonBook.write(book1).getJson()));
+	}
+
+	
 }
