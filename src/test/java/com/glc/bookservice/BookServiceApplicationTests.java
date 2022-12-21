@@ -77,14 +77,47 @@ class BookServiceApplicationTests {
 	
 	//AC3
 	@Test
-	public void canGetBooks() throws Exception{
+	public void canGetBook() throws Exception{
 		Book book1 = new Book(1,"The Hobbit", "J.r.r. Tolken", 1927, 328);
+		Book book2 = new Book(2, "It", "Stephen King", 1986, 1138);
+
 		when(bookRepository.getBook(1)).thenReturn(book1);
 		mvc.perform(get("/book/?id=1")
 		.contentType(MediaType.APPLICATION_JSON)
 		.content(jsonBook.write(book1).getJson()))
 		.andExpect(status().isOk())
 		.andExpect(content().json(jsonBook.write(book1).getJson()));
+	}
+
+	
+	/**
+	 books 1,2
+	 delete 1 ->  Deleted Successfully  
+
+	 books 1,2
+	 delete 3 -> Book id 1 Not Found
+	 */
+
+
+	//AC4
+	@Test
+	public void canDeleteBook() throws Exception{
+		Book book1 = new Book(1, "The Hobbit", "J.R.R. Tolkein", 1937, 320);
+		Book book2 = new Book(2, "It", "Stephen King", 1986, 1138);
+		Book book3 = new Book(3, "It", "Stephen King", 1986, 1138);
+
+		Collection<Book> books = new ArrayList<Book>();
+		books.add(book1);
+		books.add(book2);
+		books.add(book3);
+		// when(bookRepository.deleteBooks()).thenReturn("Book Deleted Successfully");
+		
+		mvc.perform(get("/books/delete/?id=1")
+				.contentType(MediaType.APPLICATION_JSON))
+			.andExpect(status().isOk())
+			.andExpect(content().json(jsonBooks.write(books).getJson()));
+
+
 	}
 
 	

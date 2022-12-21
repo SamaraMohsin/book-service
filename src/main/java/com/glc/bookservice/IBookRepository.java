@@ -9,4 +9,5 @@ public interface IBookRepository<T> {
 
     public T getBook(int i);
 
+    public boolean deleteBook(int id);
 }

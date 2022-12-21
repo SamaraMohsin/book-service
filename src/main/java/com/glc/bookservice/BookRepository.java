@@ -28,4 +28,11 @@ public class BookRepository implements IBookRepository<Book>{
     public Book getBook(int id){
         return this.repository.get(id);
     }
+
+    @Override
+    public boolean deleteBook(int id){
+        return this.repository.get(id).getId() == id;
+        // return this.repository.remove(id) == 1;
+        // return "Deleted Successfully";
+    }
 }

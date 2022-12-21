@@ -34,10 +34,16 @@ public class BookController {
      }
     
     
-    @GetMapping("/") //  (GET) https:locahost:8080/book/?id=1
-    public Book getBook(@RequestParam int id){
-        return this.repository.getBook(id);
-    }
+     @GetMapping("/") //  (GET) https:locahost:8080/book/?id=1
+     public Book getBook(@RequestParam int id){
+         return this.repository.getBook(id);
+     }
+    
+    //  @GetMapping("/delete/") //  (GET) https:locahost:8080/book/?id=1
+    //  public String deleteBook(@RequestParam int id){
+        //  return this.repository.deleteBook(id);
+    //  }
+     
 
 }
 
