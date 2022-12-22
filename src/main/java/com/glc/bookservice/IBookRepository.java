@@ -2,6 +2,8 @@ package com.glc.bookservice;
 
 import java.util.Collection;
 
+import org.springframework.http.ResponseEntity;
+
 public interface IBookRepository<T> {
     public void save(T t);
 
@@ -9,5 +11,7 @@ public interface IBookRepository<T> {
 
     public T getBook(int i);
 
-    public boolean deleteBook(int id);
+    public String deleteBook(int id);
+
+    public T updateBook(int i, T b);
 }

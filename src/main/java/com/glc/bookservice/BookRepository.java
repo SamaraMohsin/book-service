@@ -6,8 +6,12 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import lombok.Getter;
+
+@Getter
 @Repository
 public class BookRepository implements IBookRepository<Book>{
+    
     private Map<Integer, Book> repository;
 
     public BookRepository() {
@@ -30,9 +34,26 @@ public class BookRepository implements IBookRepository<Book>{
     }
 
     @Override
-    public boolean deleteBook(int id){
-        return this.repository.get(id).getId() == id;
-        // return this.repository.remove(id) == 1;
-        // return "Deleted Successfully";
+    public String deleteBook(int id){
+        
+        if(repository.get(id) != null ){
+            this.repository.remove(id);
+            return "Deleted Successfully";
+        }else{
+            return "Book id "+id+" Not Found";
+        }
     }
+
+    @Override
+    public Book updateBook(int id, Book b){
+        
+        if(repository.get(id) != null ){
+             this.repository.put(id, b);
+            return this.repository.get(id);
+        }else{
+            return new Book();
+        }
+    }
+
+
 }
