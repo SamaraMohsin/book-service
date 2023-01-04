@@ -38,7 +38,7 @@ public class BookController {
     public void receive(String in) throws Exception{
         ObjectMapper mapp = new ObjectMapper();
         Book book = mapp.readValue(in, new TypeReference<Book>(){});
-        System.out.println(book);
+        System.out.println(book.getTitle());
     }
 
     public BookController(BookRepository repository){
